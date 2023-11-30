@@ -1,30 +1,24 @@
-#!/usr/bin/env python3
-
-# Simple Guess game with PyAutoGUI
-# With Score
-# GitHub: https://github.com/Kourva/GuessGame
-
 import pyautogui
 import random
 
-# Easy mode
-def game_easy():
+
+def easy_mode():
 	guess = random.randint(1,10)
 	step = 1
 
-	ask = pyautogui.prompt(
+	choice = pyautogui.prompt(
 		text='Guess the number between 1 and 10 :)',
 	    title='Guess Game (Easy)',
 	)
-	while ask != str(guess):
-		pre = ask
-		if int(ask) > guess:
-		    ask = pyautogui.prompt(
+	while choice != str(guess):
+		pre = choice
+		if int(choice) > guess:
+		    choice = pyautogui.prompt(
 			text=f'Enter a number smaller than {pre}',
 		    	title='Guess Game (Easy)',
 		    )
-		elif int(ask) < guess:
-		    ask = pyautogui.prompt(
+		elif int(choice) < guess:
+		    choice = pyautogui.prompt(
 			text=f'Enter a number bigger than {pre}',
 		    	title='Guess Game (Easy)',
 		    )
@@ -43,31 +37,31 @@ def game_easy():
 	            data2.write(str(step))
 	
 	if check == "Again":
-		game_easy()
+		easy_mode()
 	else:
 		pyautogui.alert(
 			text="Bye Bye", 
 			title='Guess Game'
 		)
 
-# Menium mode
-def game_medium():
+
+def medium_mode():
 	guess = random.randint(1,10)
 	step = 1
 
-	ask = pyautogui.prompt(
+	choice = pyautogui.prompt(
 		text='Guess the number between 1 and 50 :)',
 	    title='Guess Game (Medium)',
 	)
-	while ask != str(guess):
-		pre = ask
-		if int(ask) > guess:
-		    ask = pyautogui.prompt(
+	while choice != str(guess):
+		pre = choice
+		if int(choice) > guess:
+		    choice = pyautogui.prompt(
 			    text=f'Enter a number smaller than {pre}',
 		    	title='Guess Game (Medium)',
 		    )
-		elif int(ask) < guess:
-		    ask = pyautogui.prompt(
+		elif int(choice) < guess:
+		    choice = pyautogui.prompt(
 			    text=f'Enter a number bigger than {pre}',
 		    	title='Guess Game (Meduim)',
 		    )
@@ -86,7 +80,7 @@ def game_medium():
 	            data2.write(str(step))
 
 	if check == "Again":
-		game_easy()
+		easy_mode()
 	else:
 		pyautogui.alert(
 			text="Bye Bye", 
@@ -94,25 +88,24 @@ def game_medium():
 		)
 
 
-# Hard mode
-def game_hard():
+def hard_mode():
 
 	guess = random.randint(1,100)
 	step = 1
 
-	ask = pyautogui.prompt(
+	choice = pyautogui.prompt(
 		text='Guess the number between 1 and 100 :)',
 	    title='Guess Game (Hard)',
 	)
-	while ask != str(guess):
-		pre = ask
-		if int(ask) > guess:
-		    ask = pyautogui.prompt(
+	while choice != str(guess):
+		pre = choice
+		if int(choice) > guess:
+		    choice = pyautogui.prompt(
 			    text=f'Enter a number smaller than {pre}',
 		    	title='Guess Game (Hard)',
 		    )
-		elif int(ask) < guess:
-		    ask = pyautogui.prompt(
+		elif int(choice) < guess:
+		    choice = pyautogui.prompt(
 			    text=f'Enter a number bigger than {pre}',
 		    	title='Guess Game (Hard)',
 		    )
@@ -131,12 +124,11 @@ def game_hard():
 	            data2.write(str(step))
 	
 	if check == "Again":
-		game_hard()
+		hard_mode()
 	else:
 		pyautogui.alert(text="Bye Bye", title='Guess Game')
 
 
-# Mode Choose
 mode = pyautogui.confirm(
     text = "Please select game mode\nEase: 1 to 10\nMedium: 1 to 50\nHard: 1 to 100",
     title = "Guess Game",
@@ -144,23 +136,20 @@ mode = pyautogui.confirm(
 )
 
 if mode == "Easy":
-	game_easy()
+	easy_mode()
 elif mode == "Medium":
-	game_medium()
+	medium_mode()
 elif mode == "Hard":
-	game_hard()
+	hard_mode()
 else:
-	# Score Easy
 	with open('Scores/easy') as data:
 	    lines = data.readlines()
 	    easy_score = lines[0]
 
-    # Score Medium
 	with open('Scores/medium') as data:
 	    lines = data.readlines()
 	    medium_score = lines[0]
 	    
-	# Score Hard
 	with open('Scores/hard') as data:
 	    lines = data.readlines()
 	    hard_score = lines[0]
